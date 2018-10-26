@@ -21,10 +21,10 @@ function getList()
 function getVarsUrl()
             {
                 try {
-    
                 var numero = document.getElementById("num");
                 var moneda1 =document.getElementById("moneda1");
                 var moneda2 =document.getElementById("moneda2");
+                
                 url = "https://www.alphavantage.co/query?function=FX_INTRADAY&from_symbol="+moneda1.value+"&to_symbol="+moneda2.value+"&interval=5min&apikey=71LHQU1SK9MWP8LI";
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.open("GET", url, false); // false for synchronous request
@@ -37,17 +37,19 @@ function getVarsUrl()
                 var bal=value.substr(2,value.length-3);
                 bal=parseFloat(bal*(parseInt(numero.value)));
                 document.getElementById("result").value = bal;
-            }
-            catch(err) {
-            }
+                }catch(err){}
+            
         }
+
 function genera_tabla() {
    var moneda = document.getElementById("moneda3").value;
     var monedas = getList();    
+    
     var body = document.getElementsByTagName("body")[0];
+ 
     var tabla = document.createElement("table");
     var tblBody = document.createElement("tbody");
-    for (var i = 0; i < monedas.length-1; i++) {
+    for (var i = 0; i < 5; i++) {
         var fila = document.createElement("tr");
         for (var j = 0; j < 2; j++) {
             if (monedas[i] != moneda) {
@@ -71,6 +73,7 @@ function genera_tabla() {
 function read(moneda1, moneda2) {
     url = "https://www.alphavantage.co/query?function=FX_INTRADAY&from_symbol=" + moneda1 + "&to_symbol=" + moneda2+"&interval=5min&apikey=71LHQU1SK9MWP8LI";
     var xmlHttp = new XMLHttpRequest();
+    
     xmlHttp.open("GET", url, false); // false for synchronous request
     xmlHttp.send(null);
     var lista = xmlHttp.responseText;
@@ -78,6 +81,7 @@ function read(moneda1, moneda2) {
     var value = lista[15];
     value = value.split(":");
     value = value[1];
+     
     var bal = value.substr(2, value.length - 3);
     bal = parseFloat(bal);
     return bal;
