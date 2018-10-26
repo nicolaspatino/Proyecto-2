@@ -20,122 +20,74 @@
         </style>
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
-
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <script src="js/getVarsUrl.js"></script>
+        <script src="js/getList.js"></script>
+        <script src="js/tabla.js"></script>
+        <script src="js/funciones.js"></script>
+      
     </head>
-    <body>
+    <body  onload="getList()" onkeyup="getVarsUrl()" onkeydown="getVarsUrl()">
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Money Exchange Services</a>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">MONEY EXCHANGE APP </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1>Money Exchange Service</h1>
+                <p>elija la moneda y la cantidad para ver la conversion</p>
+                Cambio de
+                <select class="custom-select mr-sm-2" id="moneda1">
+                    <option></option>
+                </select>
+                a
+                <select class="custom-select mr-sm-2" id="moneda2">
+                    <option></option>
+                </select>
+                <p>Ingrese el valor</p>
+                <input type="text" name="num" id="num" value="" onchange="getVarsUrl()" class="form-control" >
+                <p></p>
+                <img src="img.png" width="50" height="50"/>
+                <p></p>
+                <textarea id="result" rows="2" cols="160" name="something" disabled > </textarea>
+
+                
+            </div>
+            <div class="container">
+                <h1>Lista de tasa de cambio</h1>
+                <p>seleccione la moneda que desea comparar </p>
+                <select class="custom-select mr-sm-2" id="moneda3">
+                    <option ></option>
+                </select>
+                <button type="submit" class="btn btn-success" onclick=" genera_tabla()">comparar</button>
+            </div>
         </div>
-      </div>
-    </nav>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Money Services</h1>
-        <p>This is an Application that provides you  money exchange Services </p>
-      </div>
-        <script>
-                    function genera_tabla() {
-                    // Obtener la referencia del elemento body
-                    var body = document.getElementsByTagName("body")[0];
-                    // Crea un elemento <table> y un elemento <tbody>
-                    var tabla   = document.createElement("table");
-                    var tblBody = document.createElement("tbody");
-                    // Crea las celdas
-                    for (var i = 0; i < 2; i++) {
-                    // Crea las hileras de la tabla
-                    var hilera = document.createElement("tr");
-                    var celda = document.createElement("td");    
-                    var textoCelda = document.createTextNode("  Moneda  ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                    
-                    for (var j = 0; j < 2; j++) {
-                    // Crea un elemento <td> y un nodo de texto, haz que el nodo de
-                    // texto sea el contenido de <td>, ubica el elemento <td> al final
-                    // de la hilera de la tabla
-                        var celda = document.createElement("td");
-                        
-                        var textoCelda = document.createTextNode("celda en la hilera "+i+", columna "+j);
-                        celda.appendChild(textoCelda);
-                        hilera.appendChild(celda);
-                      }
 
-                      // agrega la hilera al final de la tabla (al final del elemento tblbody)
-                      tblBody.appendChild(hilera);
-                    }
+        <div class="container">
+            <!-- Example row of columns -->
 
-                    // posiciona el <tbody> debajo del elemento <table>
-                    tabla.appendChild(tblBody);
-                    // appends <table> into <body>
-                    body.appendChild(tabla);
-                    // modifica el atributo "border" de la tabla y lo fija a "2";
-                    tabla.setAttribute("border", "2");
-                  }
-                </script>
-      <div class="container">
-          <p>elija la moneda y la cantidad para ver la conversion <input type="text" id="moneda" placeholder="moneda" style="width:200px"  class="form-control" > </p>
-          <select id="opciones" name="opciones">
-                <option value="1">Primer valor</option>
-                <option value="2">Segundo valor</option>
-                <option value="3">Tercer valor</option>
-                <option value="4">Cuarto valor</option>
-          </select>
-          <p></p>
-          <select id="opciones" name="opciones">
-                <option value="1">Primer valor</option>
-                <option value="2">Segundo valor</option>
-                <option value="3">Tercer valor</option>
-                <option value="4">Cuarto valor</option>
-          </select>
-          <p></p>
-          <p><input type="text" id="moneda" placeholder="convertida" style="width:200px"  class="form-control" ></p>
-          <div style="text-align:center;">
-            <p><a class="btn btn-primary btn-lg" onclick="genera_tabla();" href="#" role="button">tabla moneda &raquo;</a></p>
-        </div>
-          
-      </div>
-    </div>
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-       </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-      </div>
+            <hr>
 
-      <hr>
-
-      <footer>
-        <p>&copy; Company 2015</p>
-      </footer>
-    </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+            <footer>
+                <p>&copy;  arem 2018</p>
+            </footer>
+        </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
         <script src="js/vendor/bootstrap.min.js"></script>
@@ -144,12 +96,20 @@
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+                    (function (b, o, i, l, e, r) {
+                        b.GoogleAnalyticsObject = l;
+                        b[l] || (b[l] =
+                                function () {
+                                    (b[l].q = b[l].q || []).push(arguments)
+                                });
+                        b[l].l = +new Date;
+                        e = o.createElement(i);
+                        r = o.getElementsByTagName(i)[0];
+                        e.src = '//www.google-analytics.com/analytics.js';
+                        r.parentNode.insertBefore(e, r)
+                    }(window, document, 'script', 'ga'));
+                    ga('create', 'UA-XXXXX-X', 'auto');
+                    ga('send', 'pageview');
         </script>
     </body>
 </html>
