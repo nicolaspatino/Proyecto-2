@@ -7,9 +7,9 @@ function getList()
             {
                 var menu = document.getElementById("moneda1");
                 var menu2 = document.getElementById("moneda2");
-                var menu3 = document.getElementById("moneda3");
-                var lista = ["JPY", "USD", "COP", "EUR", "BRL", "CAD", "AUD", "CHF", "GBP"];
+                var menu3 = document.getElementById("moneda3");                
                 var i;
+                lista= JSON.parse(lista)[rates];
                 for (i = 0; i < lista.length; i++) {
                     menu.options[i] = new Option(lista[i]);
                     menu2.options[i] = new Option(lista[i]);
@@ -69,7 +69,7 @@ function read(moneda1, moneda2) {
     xmlHttp.open("GET", url, false); // false for synchronous request
     xmlHttp.send(null);
     var lista = xmlHttp.responseText;
-    lista= JSON.parse(lista);
+    lista= JSON.parse(lista)[rates];
     var k;
     for (k = 0; k < lista.length; ++k){
         console.log(lista[k]);        
