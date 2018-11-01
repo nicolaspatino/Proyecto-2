@@ -7,9 +7,14 @@ function getList()
             {
                 var menu = document.getElementById("moneda1");
                 var menu2 = document.getElementById("moneda2");
-                var menu3 = document.getElementById("moneda3");                
-                var i;
-                lista= JSON.parse(lista)[rates];
+                var menu3 = document.getElementById("moneda3"); 
+                url ="https://mbsyj73bqa.execute-api.us-east-1.amazonaws.com/prod/recurso";
+                var i = 0;
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open("GET", url, false); // false for synchronous request
+                xmlHttp.send(null);
+                var lista = xmlHttp.responseText;
+                lista= JSON.parse(lista)['rates'];
                 for (i = 0; i < lista.length; i++) {
                     menu.options[i] = new Option(lista[i]);
                     menu2.options[i] = new Option(lista[i]);
@@ -24,7 +29,7 @@ function getVarsUrl()
                 var numero = document.getElementById("num");
                 var moneda1 =document.getElementById("moneda1");
                 var moneda2 =document.getElementById("moneda2"); 
-                url ="https://mbsyj73bqa.execute-api.us-east-1.amazonaws.com/prod/recurso";
+                
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.open("GET", url, false); // false for synchronous request
                 xmlHttp.send(null);
@@ -69,7 +74,7 @@ function read(moneda1, moneda2) {
     xmlHttp.open("GET", url, false); // false for synchronous request
     xmlHttp.send(null);
     var lista = xmlHttp.responseText;
-    lista= JSON.parse(lista)[rates];
+    lista= JSON.parse(lista)['rates'];
     var k;
     for (k = 0; k < lista.length; ++k){
         console.log(lista[k]);        
