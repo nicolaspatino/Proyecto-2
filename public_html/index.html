@@ -51,7 +51,7 @@
                 <h1>Money Exchange Service</h1>
                 <p>elija la moneda y la cantidad para ver la conversion</p>
                 Cambio de
-                <select class="custom-select mr-sm-2" id="moneda1">
+                <select class="custom-select mr-sm-2" id="moneda1" onchange="calculaValue()">
                     <option></option>
                 </select>
                 a
@@ -59,7 +59,7 @@
                     <option></option>
                 </select>
                 <p>Ingrese el valor</p>
-                <input type="text" name="num" id="num" value="" onchange="getVarsUrl()" class="form-control" >
+                <input type="text" name="num" id="num" value="" onchange="calculaValue()" class="form-control" >
                 <p></p>
                 <img src="img.png" width="50" height="50"/>
                 <p></p>

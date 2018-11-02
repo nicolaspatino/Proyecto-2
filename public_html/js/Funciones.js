@@ -4,37 +4,53 @@
  * and open the template in the editor.
  */
 function getList()
-            {
+            {            
                 var menu = document.getElementById("moneda1");
                 var menu2 = document.getElementById("moneda2");
                 var menu3 = document.getElementById("moneda3"); 
-                url ="https://mbsyj73bqa.execute-api.us-east-1.amazonaws.com/prod/recurso";
-                var i = 0;
-                var xmlHttp = new XMLHttpRequest();
-                xmlHttp.open("GET", url, false); // false for synchronous request
-                xmlHttp.send(null);
-                var lista = xmlHttp.responseText;
-                lista= JSON.parse(lista)['rates'];
-                for (i = 0; i < lista.length; i++) {
-                    menu.options[i] = new Option(lista[i]);
-                    menu2.options[i] = new Option(lista[i]);
-                    menu3.options[i] = new Option(lista[i]);
+                var lista = valores()
+                for (var a in lista) {
+                    menu.options[i] = new Option(a);
+                    menu2.options[i] = new Option(a);
+                    menu3.options[i] = new Option(a);
+                    i+=1;
                 }
                 return lista;
             }
 
-function getVarsUrl()
+function calculaValue()
             {
+                alert("hola");
                 try {
-                var numero = document.getElementById("num");
-                var moneda1 =document.getElementById("moneda1");
-                var moneda2 =document.getElementById("moneda2"); 
-                
-                var xmlHttp = new XMLHttpRequest();
-                xmlHttp.open("GET", url, false); // false for synchronous request
-                xmlHttp.send(null);
-                var lista = xmlHttp.responseText;
-                
+                    var numero = document.getElementById("num");
+                    var moneda1 = document.getElementById("moneda1");
+                    var moneda2 = document.getElementById("moneda2");
+                    var lista=valores();
+                    
+                    var tasa1;
+                    var tasa2;
+                    
+                    var flag = false;
+                    
+                    if (moneda1.value === '"USD"') {
+                        flag = true;
+                    }
+                    for (var x in lista) {
+                        if (x === moneda1.value) {
+                            tasa1 = parseFloat(lista[x]);
+                        }
+                        if (x === moneda2.value) {
+                            tasa2 = parseFloat(lista[x]);
+                        }
+                    }
+                    var bal;
+                    if (flag) {
+                        bal = tasa2 * numero.value;
+                    } else {
+                        var temp=(1/tasa1)*tasa2;
+                        bal = temp*numero.value;
+                    }
+                    document.getElementById("result").value = bal;
                 }catch(err){}
             
         }
@@ -69,6 +85,7 @@ function genera_tabla() {
     tabla.setAttribute("border", "2");
 }
 function read(moneda1, moneda2) {
+    confirm("mensaje");
     url ="https://mbsyj73bqa.execute-api.us-east-1.amazonaws.com/prod/recurso";
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", url, false); // false for synchronous request
@@ -79,5 +96,17 @@ function read(moneda1, moneda2) {
     for (k = 0; k < lista.length; ++k){
         console.log(lista[k]);        
     }
+}
+function valores(){
+    url ="https://mbsyj73bqa.execute-api.us-east-1.amazonaws.com/prod/recurso";
+    var i = 0;
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", url, false); // false for synchronous request
+    xmlHttp.send(null);
+    var lista = xmlHttp.responseText;
+    lista= JSON.parse(lista)['rates'];
+    return lista;
+    
+      
     
 }
